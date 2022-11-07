@@ -23,7 +23,7 @@ class AddNoteView: UIView {
         label.font = .systemFont(ofSize: 20, weight: .regular)
         label.textColor = .black
         label.textAlignment = .left
-        label.text = "TEST"
+        label.text = ""
         return label
     }()
         
@@ -47,8 +47,8 @@ class AddNoteView: UIView {
     private lazy var cameraView: UIView = {
         let view = UIView()
         view.translatesAutoresizingMaskIntoConstraints = false
-        view.backgroundColor = .gray
-        view.layer.borderWidth = 2
+        view.backgroundColor = UIColor(hexString: "DFDFDF")
+        view.layer.borderWidth = 10
         view.layer.borderColor = UIColor.black.cgColor
         return view
     }()
@@ -230,7 +230,9 @@ class AddNoteView: UIView {
     
     @objc private func recordBtnSelected() {
         if let resultText = resultLabel.text {
+            if resultText.count == 0 { return }
             saveNote(content: resultText)
+            resultLabel.text = ""
         }
     }
 }
