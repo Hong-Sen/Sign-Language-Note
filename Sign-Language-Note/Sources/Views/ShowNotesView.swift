@@ -89,7 +89,7 @@ class ShowNotesView: UIView {
             navigationBarView.topAnchor.constraint(equalTo: topAnchor, constant: 0),
             navigationBarView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 0),
             navigationBarView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: 0),
-            navigationBarView.heightAnchor.constraint(equalToConstant: 63)
+            navigationBarView.heightAnchor.constraint(equalToConstant: 93)
         ])
     }
     

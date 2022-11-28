@@ -31,6 +31,7 @@ class AddNoteViewController: UIViewController {
     }
     
     @objc private func backBtnSelected() {
+        print("###")
         self.navigationController?.popViewController(animated: true)
     }
 }

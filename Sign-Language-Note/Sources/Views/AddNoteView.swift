@@ -122,14 +122,14 @@ class AddNoteView: UIView {
             textView.topAnchor.constraint(equalTo: topAnchor, constant: 0),
             textView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 0),
             textView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: 0),
-            textView.heightAnchor.constraint(equalToConstant: 90)
+            textView.heightAnchor.constraint(equalToConstant: 120)
         ])
     }
     
     private func setUpBackBtn() {
         textView.addSubview(backBtn)
         NSLayoutConstraint.activate([
-            backBtn.centerYAnchor.constraint(equalTo: textView.centerYAnchor),
+            backBtn.topAnchor.constraint(equalTo: topAnchor, constant: 70),
             backBtn.leadingAnchor.constraint(equalTo: textView.leadingAnchor, constant: 9),
             backBtn.widthAnchor.constraint(equalToConstant: 40)
         ])
@@ -138,7 +138,7 @@ class AddNoteView: UIView {
     private func setUpResultLabel() {
         textView.addSubview(resultLabel)
         NSLayoutConstraint.activate([
-            resultLabel.centerYAnchor.constraint(equalTo: textView.centerYAnchor),
+            resultLabel.topAnchor.constraint(equalTo: topAnchor, constant: 70),
             resultLabel.leadingAnchor.constraint(equalTo: backBtn.trailingAnchor, constant: 10),
             resultLabel.trailingAnchor.constraint(equalTo: deleteBtn.leadingAnchor, constant: -10)
         ])
@@ -147,7 +147,7 @@ class AddNoteView: UIView {
     private func setUpDeleteBtn() {
         textView.addSubview(deleteBtn)
         NSLayoutConstraint.activate([
-            deleteBtn.centerYAnchor.constraint(equalTo: textView.centerYAnchor),
+            deleteBtn.topAnchor.constraint(equalTo: topAnchor, constant: 70),
             deleteBtn.trailingAnchor.constraint(equalTo: textView.trailingAnchor, constant: -15),
             deleteBtn.widthAnchor.constraint(equalToConstant: 40)
         ])

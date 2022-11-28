@@ -91,7 +91,7 @@ class HomeView: UIView {
         addSubview(titleView)
         NSLayoutConstraint.activate([
             titleView.centerXAnchor.constraint(equalTo: centerXAnchor),
-            titleView.topAnchor.constraint(equalTo: topAnchor, constant: 54),
+            titleView.topAnchor.constraint(equalTo: topAnchor, constant: 70),
             titleView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 28),
             titleView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -28),
             titleView.heightAnchor.constraint(equalToConstant: 181)
