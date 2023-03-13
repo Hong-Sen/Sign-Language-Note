@@ -92,13 +92,13 @@ class AddNoteView: UIView {
     private let encoder = JSONEncoder()
     var noteList: [NoteModel] = UserDefaultsManager.shared.load()
     private let dateFormatter = DateFormatter()
+    private lazy var avCaptureManager = AVCaptureManager()
     
     init() {
         super.init(frame: .zero)
         checkCameraAuthorization()
         setupViews()
         sendSubviewToBack(cameraView)
-        
     }
     
     required init?(coder: NSCoder) {
@@ -112,6 +112,7 @@ class AddNoteView: UIView {
         setUpDeleteBtn()
         setUpResultLabel()
         setUpCameraView()
+        setUpRecognizedTextLabel()
         setUpBottomView()
         setUpAddBtn()
         setUpRecordBtn()
@@ -166,10 +167,10 @@ class AddNoteView: UIView {
     }
     
      func setUpRecognizedTextLabel() {
-        cameraView.addSubview(recognizedTextLabel)
+        addSubview(recognizedTextLabel)
         NSLayoutConstraint.activate([
-            recognizedTextLabel.topAnchor.constraint(equalTo: cameraView.topAnchor, constant: 17),
-            recognizedTextLabel.trailingAnchor.constraint(equalTo: cameraView.trailingAnchor, constant: -25)
+            recognizedTextLabel.topAnchor.constraint(equalTo: topAnchor, constant: 140),
+            recognizedTextLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -15)
         ])
     }
     
@@ -207,16 +208,42 @@ class AddNoteView: UIView {
         case .authorized:
             print("카메라 권한 이미 허용")
             // previewlayer 띄우기
+            avCaptureManager.createVideoPreviewLayer { AVCaptureFailureReason in
+                // cameraview 안된다고 띄우기
+                print("previewLayer Error: \(AVCaptureFailureReason)")
+            } previewLayerValue: { previewLayerValue in
+                self.setupPreviewLayer(previewLayer: previewLayerValue)
+            }
+
             break
         case .notDetermined:
             AVCaptureDevice.requestAccess(for: .video) { granted in
-                if granted { print("카메라 권한 허용")}
-                // previewlayer 띄우기
+                if granted {
+                    print("카메라 권한 허용")
+                    // cameraview 안된다고 띄우기
+                    self.avCaptureManager.createVideoPreviewLayer { AVCaptureFailureReason in
+                        // 따로 처리
+                        print("previewLayer Error: \(AVCaptureFailureReason)")
+                    } previewLayerValue: { previewLayerValue in
+                        self.setupPreviewLayer(previewLayer: previewLayerValue)
+                    }
+                }
+
             }
             break
         default:
             // cameraview 안된다고 띄우기
             break
+        }
+    }
+    
+    func setupPreviewLayer(previewLayer: AVCaptureVideoPreviewLayer) {
+        cameraView.layer.insertSublayer(previewLayer, at: 0)
+        DispatchQueue.main.async {
+            previewLayer.frame = self.cameraView.bounds
+            UIView.animate(withDuration: 0.8) {
+                self.cameraView.layer.opacity = 1
+            }
         }
     }
     

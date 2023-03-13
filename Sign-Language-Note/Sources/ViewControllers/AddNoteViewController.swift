@@ -17,11 +17,7 @@ class AddNoteViewController: UIViewController {
         self.navigationController?.navigationBar.isHidden = true
         setupViews()
     }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-    }
-    
+
     private func setupViews() {
         view.addSubview(addNoteView)
         addNoteView.translatesAutoresizingMaskIntoConstraints = false

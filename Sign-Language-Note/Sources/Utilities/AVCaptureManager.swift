@@ -17,7 +17,7 @@ class AVCaptureManager: NSObject {
     ).devices.first
     var deviceInput: AVCaptureDeviceInput!
     var videoOutput = AVCaptureVideoDataOutput()
-    var previewLayer: AVCaptureVideoPreviewLayer?
+    var previewLayer: AVCaptureVideoPreviewLayer!
     let videoOutputQueue = DispatchQueue(
         label: "videoOutput",
         qos: .userInteractive,
@@ -78,6 +78,30 @@ class AVCaptureManager: NSObject {
         
         captureSession.commitConfiguration()
         completion(nil)
+    }
+    
+    private func setupCaptureVideoPreviewLayer() {
+        previewLayer = AVCaptureVideoPreviewLayer(session: captureSession)
+        previewLayer.videoGravity = AVLayerVideoGravity.resizeAspectFill
+    }
+    
+    func createVideoPreviewLayer(failureReason: @escaping(AVCaptureFailureReason) -> Void, previewLayerValue: @escaping(AVCaptureVideoPreviewLayer) -> Void) {
+        setupAVCapture { [weak self] error in
+            if let error = error {
+                failureReason(error)
+                return
+            }
+            
+            self?.setupCaptureVideoPreviewLayer()
+            
+            guard let previewLayer = self?.previewLayer else {
+                failureReason(.unavailablePreviewLayer)
+                return
+            }
+            
+            previewLayerValue(previewLayer)
+            self?.captureSession.startRunning()
+        }
     }
 }
 

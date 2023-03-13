@@ -14,4 +14,5 @@ enum AVCaptureFailureReason: String {
     case couldNotAddOutputToSsession = "couldNotAddOutputToSsession"
     case couldNotCreatepreviewLayer = "couldNotCreatepreviewLayer"
     case failedVideoCaptureLockForConfiguration = "failedVideoCaptureLockForConfiguration"
+    case unavailablePreviewLayer = "unavailablePreviewLayer"
 }
