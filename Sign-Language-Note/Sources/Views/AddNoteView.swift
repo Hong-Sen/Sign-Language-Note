@@ -49,7 +49,6 @@ class AddNoteView: UIView {
         let view = UIView()
         view.translatesAutoresizingMaskIntoConstraints = false
         view.backgroundColor = .systemBackground
-        view.layer.opacity = 0
         return view
     }()
     
@@ -93,6 +92,7 @@ class AddNoteView: UIView {
     var noteList: [NoteModel] = UserDefaultsManager.shared.load()
     private let dateFormatter = DateFormatter()
     private lazy var avCaptureManager = AVCaptureManager()
+    private let notAllowCameraView = NotAllowCameraView()
     
     init() {
         super.init(frame: .zero)
@@ -122,17 +122,17 @@ class AddNoteView: UIView {
     private func setUpTitleView() {
         addSubview(textView)
         NSLayoutConstraint.activate([
-            textView.topAnchor.constraint(equalTo: topAnchor, constant: 0),
-            textView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 0),
-            textView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: 0),
-            textView.heightAnchor.constraint(equalToConstant: 120)
+            textView.topAnchor.constraint(equalTo: self.safeAreaLayoutGuide.topAnchor),
+            textView.leadingAnchor.constraint(equalTo: leadingAnchor),
+            textView.trailingAnchor.constraint(equalTo: trailingAnchor),
+            textView.heightAnchor.constraint(equalToConstant: 70)
         ])
     }
     
     private func setUpBackBtn() {
         textView.addSubview(backBtn)
         NSLayoutConstraint.activate([
-            backBtn.topAnchor.constraint(equalTo: topAnchor, constant: 70),
+            backBtn.centerYAnchor.constraint(equalTo: textView.centerYAnchor),
             backBtn.leadingAnchor.constraint(equalTo: textView.leadingAnchor, constant: 9),
             backBtn.widthAnchor.constraint(equalToConstant: 40)
         ])
@@ -141,7 +141,7 @@ class AddNoteView: UIView {
     private func setUpResultLabel() {
         textView.addSubview(resultLabel)
         NSLayoutConstraint.activate([
-            resultLabel.topAnchor.constraint(equalTo: topAnchor, constant: 70),
+            resultLabel.centerYAnchor.constraint(equalTo: textView.centerYAnchor),
             resultLabel.leadingAnchor.constraint(equalTo: backBtn.trailingAnchor, constant: 10),
             resultLabel.trailingAnchor.constraint(equalTo: deleteBtn.leadingAnchor, constant: -10)
         ])
@@ -150,7 +150,7 @@ class AddNoteView: UIView {
     private func setUpDeleteBtn() {
         textView.addSubview(deleteBtn)
         NSLayoutConstraint.activate([
-            deleteBtn.topAnchor.constraint(equalTo: topAnchor, constant: 70),
+            deleteBtn.centerYAnchor.constraint(equalTo: textView.centerYAnchor),
             deleteBtn.trailingAnchor.constraint(equalTo: textView.trailingAnchor, constant: -15),
             deleteBtn.widthAnchor.constraint(equalToConstant: 40)
         ])
@@ -180,7 +180,7 @@ class AddNoteView: UIView {
             bottomView.topAnchor.constraint(equalTo: cameraView.bottomAnchor, constant: 0),
             bottomView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 0),
             bottomView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: 0),
-            bottomView.bottomAnchor.constraint(equalTo: bottomAnchor, constant: 0)
+            bottomView.bottomAnchor.constraint(equalTo: safeAreaLayoutGuide.bottomAnchor, constant: 0)
         ])
     }
    
@@ -206,35 +206,30 @@ class AddNoteView: UIView {
     func checkCameraAuthorization() {
         switch AVCaptureDevice.authorizationStatus(for: .video) {
         case .authorized:
-            print("카메라 권한 이미 허용")
-            // previewlayer 띄우기
+            print("새노트: 카메라 권한 이미 허용")
             avCaptureManager.createVideoPreviewLayer { AVCaptureFailureReason in
-                // cameraview 안된다고 띄우기
                 print("previewLayer Error: \(AVCaptureFailureReason)")
             } previewLayerValue: { previewLayerValue in
                 self.setupPreviewLayer(previewLayer: previewLayerValue)
             }
 
             break
-        case .notDetermined:
-            AVCaptureDevice.requestAccess(for: .video) { granted in
-                if granted {
-                    print("카메라 권한 허용")
-                    // cameraview 안된다고 띄우기
-                    self.avCaptureManager.createVideoPreviewLayer { AVCaptureFailureReason in
-                        // 따로 처리
-                        print("previewLayer Error: \(AVCaptureFailureReason)")
-                    } previewLayerValue: { previewLayerValue in
-                        self.setupPreviewLayer(previewLayer: previewLayerValue)
-                    }
-                }
-
-            }
-            break
         default:
-            // cameraview 안된다고 띄우기
+            print("새노트: 카메라 권한 거부")
+            setupNotAllowCameraView()
             break
         }
+    }
+    
+    func setupNotAllowCameraView() {
+        notAllowCameraView.translatesAutoresizingMaskIntoConstraints = false
+        cameraView.addSubview(notAllowCameraView)
+        NSLayoutConstraint.activate([
+            notAllowCameraView.topAnchor.constraint(equalTo: cameraView.topAnchor),
+            notAllowCameraView.leadingAnchor.constraint(equalTo: cameraView.leadingAnchor),
+            notAllowCameraView.trailingAnchor.constraint(equalTo: cameraView.trailingAnchor),
+            notAllowCameraView.bottomAnchor.constraint(equalTo: cameraView.bottomAnchor)
+        ])
     }
     
     func setupPreviewLayer(previewLayer: AVCaptureVideoPreviewLayer) {
