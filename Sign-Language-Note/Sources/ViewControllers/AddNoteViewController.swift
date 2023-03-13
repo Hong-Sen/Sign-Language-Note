@@ -6,15 +6,20 @@
 //
 
 import UIKit
+import AVFoundation
 
 class AddNoteViewController: UIViewController {
-
+    
     private lazy var addNoteView = AddNoteView()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         self.navigationController?.navigationBar.isHidden = true
         setupViews()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
     }
     
     private func setupViews() {
@@ -31,7 +36,6 @@ class AddNoteViewController: UIViewController {
     }
     
     @objc private func backBtnSelected() {
-        print("###")
         self.navigationController?.popViewController(animated: true)
     }
 }

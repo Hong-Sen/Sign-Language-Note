@@ -7,6 +7,7 @@
 
 import Foundation
 import UIKit
+import AVFoundation
 
 class AddNoteView: UIView {
     
@@ -44,12 +45,11 @@ class AddNoteView: UIView {
         return btn
     }()
     
-    private lazy var cameraView: UIView = {
+     lazy var cameraView: UIView = {
         let view = UIView()
         view.translatesAutoresizingMaskIntoConstraints = false
-        view.backgroundColor = UIColor(hexString: "DFDFDF")
-        view.layer.borderWidth = 10
-        view.layer.borderColor = UIColor.black.cgColor
+        view.backgroundColor = .systemBackground
+        view.layer.opacity = 0
         return view
     }()
     
@@ -95,7 +95,10 @@ class AddNoteView: UIView {
     
     init() {
         super.init(frame: .zero)
+        checkCameraAuthorization()
         setupViews()
+        sendSubviewToBack(cameraView)
+        
     }
     
     required init?(coder: NSCoder) {
@@ -109,7 +112,6 @@ class AddNoteView: UIView {
         setUpDeleteBtn()
         setUpResultLabel()
         setUpCameraView()
-        setUpRecognizedTextLabel()
         setUpBottomView()
         setUpAddBtn()
         setUpRecordBtn()
@@ -156,18 +158,18 @@ class AddNoteView: UIView {
     private func setUpCameraView() {
         addSubview(cameraView)
         NSLayoutConstraint.activate([
-            cameraView.topAnchor.constraint(equalTo: textView.bottomAnchor, constant: 10),
+            cameraView.topAnchor.constraint(equalTo: textView.bottomAnchor, constant: 0),
             cameraView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 0),
             cameraView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: 0),
             cameraView.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -110)
         ])
     }
     
-    private func setUpRecognizedTextLabel() {
+     func setUpRecognizedTextLabel() {
         cameraView.addSubview(recognizedTextLabel)
         NSLayoutConstraint.activate([
             recognizedTextLabel.topAnchor.constraint(equalTo: cameraView.topAnchor, constant: 17),
-            recognizedTextLabel.trailingAnchor.constraint(equalTo: cameraView.trailingAnchor, constant: -20)
+            recognizedTextLabel.trailingAnchor.constraint(equalTo: cameraView.trailingAnchor, constant: -25)
         ])
     }
     
@@ -198,6 +200,24 @@ class AddNoteView: UIView {
             recordBtn.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -45),
             recordBtn.widthAnchor.constraint(equalToConstant: 70)
         ])
+    }
+    
+    func checkCameraAuthorization() {
+        switch AVCaptureDevice.authorizationStatus(for: .video) {
+        case .authorized:
+            print("카메라 권한 이미 허용")
+            // previewlayer 띄우기
+            break
+        case .notDetermined:
+            AVCaptureDevice.requestAccess(for: .video) { granted in
+                if granted { print("카메라 권한 허용")}
+                // previewlayer 띄우기
+            }
+            break
+        default:
+            // cameraview 안된다고 띄우기
+            break
+        }
     }
     
     @objc private func deleteBtnSelected() {
