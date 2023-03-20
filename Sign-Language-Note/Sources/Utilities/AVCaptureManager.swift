@@ -8,7 +8,7 @@
 import UIKit
 import AVFoundation
 
-public protocol VideoCaptureDelegate: class {
+public protocol VideoCaptureDelegate: AnyObject {
     func onFrameCaptured(avCapture: AVCaptureManager, pixelBuffer: CVPixelBuffer?, timestamp: CMTime)
 }
 
@@ -30,7 +30,6 @@ public class AVCaptureManager: NSObject {
         autoreleaseFrequency: .workItem)
     var bufferSize: CGSize = .zero
     var lastTimestamp = CMTime()
-    var idx = 0
     
     private func setupAVCapture(completion: @escaping (AVCaptureFailureReason?) -> Void) {
             guard let videoDevice = videoDevice else {
@@ -142,6 +141,15 @@ public class AVCaptureManager: NSObject {
 
 extension AVCaptureManager: AVCaptureVideoDataOutputSampleBufferDelegate {
     public func captureOutput(_ output: AVCaptureOutput, didOutput sampleBuffer: CMSampleBuffer, from connection: AVCaptureConnection) {
-        //
+        // output은 AVCaptureVideoDataOutput 형식이고 프레임 관련 출력
+        guard let delegate = self.delegate else { return }
+        
+        let timestamp = CMSampleBufferGetPresentationTimeStamp(sampleBuffer)
+        let elapsedTime = timestamp - lastTimestamp
+        if elapsedTime >= CMTimeMake(value: 1, timescale: Int32(15)) {
+            lastTimestamp = timestamp
+            let imgBuffer = CMSampleBufferGetImageBuffer(sampleBuffer)
+            delegate.onFrameCaptured(avCapture: self, pixelBuffer: imgBuffer, timestamp: timestamp)
+        }
     }
 }

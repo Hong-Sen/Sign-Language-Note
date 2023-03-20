@@ -36,5 +36,4 @@ class AddNoteViewController: UIViewController {
             self.navigationController?.popViewController(animated: true)
         }
     }
-    
 }
