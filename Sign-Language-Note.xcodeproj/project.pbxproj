@@ -160,7 +160,6 @@
 				746E95882918D34800C48EC0 /* ViewControllers */,
 				746E95872918D34100C48EC0 /* Views */,
 				74522C752919068E00A3A14D /* ViewModels */,
-				74743D5D298D669200A19D30 /* CoreML */,
 			);
 			path = Sources;
 			sourceTree = "<group>";
@@ -202,13 +201,6 @@
 				745C03DA29BF292800B8E2A7 /* CIImage+Extension.swift */,
 			);
 			path = Extensions;
-			sourceTree = "<group>";
-		};
-		74743D5D298D669200A19D30 /* CoreML */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = CoreML;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */

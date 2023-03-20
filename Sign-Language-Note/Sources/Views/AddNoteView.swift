@@ -33,7 +33,7 @@ class AddNoteView: UIView {
         btn.translatesAutoresizingMaskIntoConstraints = false
         btn.setImage(UIImage(systemName: "chevron.left"), for: .normal)
         btn.tintColor = .black
-        btn.addTarget(AddNoteView.self, action: #selector(backBtnSelected), for: .touchUpInside)
+        btn.addTarget(self, action: #selector(backBtnSelected), for: .touchUpInside)
         return btn
     }()
     
@@ -59,7 +59,7 @@ class AddNoteView: UIView {
         label.font = .systemFont(ofSize: 64, weight: .regular)
         label.textColor = .red
         label.textAlignment = .center
-        label.text = ""
+        label.text = "?"
         return label
     }()
     
@@ -89,6 +89,8 @@ class AddNoteView: UIView {
     }()
     
     private lazy var avCaptureManager = AVCaptureManager()
+    let model = ASLHandClassifier()
+    let context = CIContext()
     private let userDefault = UserDefaults.standard
     var noteList: [NoteModel] = UserDefaultsManager.shared.load()
     private let dateFormatter = DateFormatter()
@@ -100,6 +102,8 @@ class AddNoteView: UIView {
         checkCameraAuthorization()
         setupViews()
         sendSubviewToBack(cameraView)
+        
+        self.avCaptureManager.delegate = self
     }
     
     required init?(coder: NSCoder) {
@@ -223,9 +227,6 @@ class AddNoteView: UIView {
         default:
             print("새노트: 카메라 권한 거부")
             setupNotAllowCameraView()
-            recognizedTextLabel.isHidden = true
-            addBtn.isEnabled = false
-            recordBtn.isEnabled = false
             break
         }
     }
@@ -269,7 +270,7 @@ class AddNoteView: UIView {
     
     @objc private func addeBtnSelected() {
         if let recognizedText = recognizedTextLabel.text, let resultText = resultLabel.text {
-            if resultText.count >= 20 {
+            if resultText.count >= 18 {
                 saveNote(content: resultText)
                 resultLabel.text = recognizedText
             }
@@ -289,5 +290,19 @@ class AddNoteView: UIView {
     
     @objc private func backBtnSelected() {
         popVCHandler?()
+    }
+}
+
+extension AddNoteView: VideoCaptureDelegate {
+    func onFrameCaptured(avCapture: AVCaptureManager, pixelBuffer: CVPixelBuffer?, timestamp: CMTime) {
+        guard let pixelBuffer = pixelBuffer else { return }
+        
+        guard let scaledPixelBuffer = CIImage(cvImageBuffer: pixelBuffer).resize(size: CGSize(width: 299, height: 299)).toPixelBuffer(context: context) else { return }
+        
+        let prediction = try? self.model.prediction(image: scaledPixelBuffer)
+        
+        DispatchQueue.main.async {
+            self.recognizedTextLabel.text = prediction?.classLabel ?? "?"
+        }
     }
 }
