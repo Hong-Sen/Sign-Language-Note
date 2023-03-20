@@ -6,20 +6,17 @@
 //
 
 import UIKit
-import AVFoundation
 
 class AddNoteViewController: UIViewController {
-    
+
     private lazy var addNoteView = AddNoteView()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         self.navigationController?.navigationBar.isHidden = true
-        
         setupViews()
-        setupAction()
     }
-
+    
     private func setupViews() {
         view.addSubview(addNoteView)
         addNoteView.translatesAutoresizingMaskIntoConstraints = false
@@ -29,12 +26,12 @@ class AddNoteViewController: UIViewController {
             addNoteView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             addNoteView.trailingAnchor.constraint(equalTo: view.trailingAnchor)
         ])
+        
+        addNoteView.backBtn.addTarget(self, action: #selector(backBtnSelected), for: .touchUpInside)
     }
     
-    private func setupAction() {
-        addNoteView.setupPopVCHandler {
-            self.navigationController?.popViewController(animated: true)
-        }
+    @objc private func backBtnSelected() {
+        print("###")
+        self.navigationController?.popViewController(animated: true)
     }
-    
 }

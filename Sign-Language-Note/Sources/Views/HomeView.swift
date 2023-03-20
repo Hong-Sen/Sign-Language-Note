@@ -7,7 +7,6 @@
 
 import Foundation
 import UIKit
-import AVFoundation
 
 class HomeView: UIView {
     
@@ -71,7 +70,6 @@ class HomeView: UIView {
     
     init() {
         super.init(frame: .zero)
-        checkCameraAuthorization()
         setupViews()
     }
     
@@ -144,26 +142,6 @@ class HomeView: UIView {
             showNotesBtn.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -34),
             showNotesBtn.heightAnchor.constraint(equalToConstant: 130)
         ])
-    }
-    
-    func checkCameraAuthorization() {
-        switch AVCaptureDevice.authorizationStatus(for: .video) {
-        case .authorized:
-            print("홈: 카메라 권한 이미 허용")
-            break
-        case .notDetermined:
-            AVCaptureDevice.requestAccess(for: .video) { granted in
-                guard granted else {
-                    print("홈: 카메라 권한 거부")
-                    return
-                }
-                print("홈: 카메라 권한 허용")
-            }
-            break
-        default:
-            print("홈: 카메라 권한 거부")
-            break
-        }
     }
     
 }
