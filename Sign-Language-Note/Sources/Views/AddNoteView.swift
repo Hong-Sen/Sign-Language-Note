@@ -7,7 +7,6 @@
 
 import Foundation
 import UIKit
-import AVFoundation
 
 class AddNoteView: UIView {
     
@@ -33,7 +32,6 @@ class AddNoteView: UIView {
         btn.translatesAutoresizingMaskIntoConstraints = false
         btn.setImage(UIImage(systemName: "chevron.left"), for: .normal)
         btn.tintColor = .black
-        btn.addTarget(AddNoteView.self, action: #selector(backBtnSelected), for: .touchUpInside)
         return btn
     }()
     
@@ -46,20 +44,22 @@ class AddNoteView: UIView {
         return btn
     }()
     
-     lazy var cameraView: UIView = {
+    private lazy var cameraView: UIView = {
         let view = UIView()
         view.translatesAutoresizingMaskIntoConstraints = false
-        view.backgroundColor = .systemBackground
+        view.backgroundColor = UIColor(hexString: "DFDFDF")
+        view.layer.borderWidth = 10
+        view.layer.borderColor = UIColor.black.cgColor
         return view
     }()
     
-     lazy var recognizedTextLabel: UILabel = {
+    private lazy var recognizedTextLabel: UILabel = {
        let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.font = .systemFont(ofSize: 64, weight: .regular)
         label.textColor = .red
         label.textAlignment = .center
-        label.text = ""
+        label.text = "A"
         return label
     }()
     
@@ -88,26 +88,18 @@ class AddNoteView: UIView {
         return btn
     }()
     
-    private lazy var avCaptureManager = AVCaptureManager()
     private let userDefault = UserDefaults.standard
+    private let encoder = JSONEncoder()
     var noteList: [NoteModel] = UserDefaultsManager.shared.load()
     private let dateFormatter = DateFormatter()
-    private let notAllowCameraView = NotAllowCameraView()
-    var popVCHandler: (() -> Void)?
     
     init() {
         super.init(frame: .zero)
-        checkCameraAuthorization()
         setupViews()
-        sendSubviewToBack(cameraView)
     }
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
-    }
-    
-    func setupPopVCHandler(_ handler: @escaping () -> Void) {
-        popVCHandler = handler
     }
     
     private func setupViews() {
@@ -127,17 +119,17 @@ class AddNoteView: UIView {
     private func setUpTitleView() {
         addSubview(textView)
         NSLayoutConstraint.activate([
-            textView.topAnchor.constraint(equalTo: self.safeAreaLayoutGuide.topAnchor),
-            textView.leadingAnchor.constraint(equalTo: leadingAnchor),
-            textView.trailingAnchor.constraint(equalTo: trailingAnchor),
-            textView.heightAnchor.constraint(equalToConstant: 70)
+            textView.topAnchor.constraint(equalTo: topAnchor, constant: 0),
+            textView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 0),
+            textView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: 0),
+            textView.heightAnchor.constraint(equalToConstant: 120)
         ])
     }
     
     private func setUpBackBtn() {
         textView.addSubview(backBtn)
         NSLayoutConstraint.activate([
-            backBtn.centerYAnchor.constraint(equalTo: textView.centerYAnchor),
+            backBtn.topAnchor.constraint(equalTo: topAnchor, constant: 70),
             backBtn.leadingAnchor.constraint(equalTo: textView.leadingAnchor, constant: 9),
             backBtn.widthAnchor.constraint(equalToConstant: 40)
         ])
@@ -146,7 +138,7 @@ class AddNoteView: UIView {
     private func setUpResultLabel() {
         textView.addSubview(resultLabel)
         NSLayoutConstraint.activate([
-            resultLabel.centerYAnchor.constraint(equalTo: textView.centerYAnchor),
+            resultLabel.topAnchor.constraint(equalTo: topAnchor, constant: 70),
             resultLabel.leadingAnchor.constraint(equalTo: backBtn.trailingAnchor, constant: 10),
             resultLabel.trailingAnchor.constraint(equalTo: deleteBtn.leadingAnchor, constant: -10)
         ])
@@ -155,7 +147,7 @@ class AddNoteView: UIView {
     private func setUpDeleteBtn() {
         textView.addSubview(deleteBtn)
         NSLayoutConstraint.activate([
-            deleteBtn.centerYAnchor.constraint(equalTo: textView.centerYAnchor),
+            deleteBtn.topAnchor.constraint(equalTo: topAnchor, constant: 70),
             deleteBtn.trailingAnchor.constraint(equalTo: textView.trailingAnchor, constant: -15),
             deleteBtn.widthAnchor.constraint(equalToConstant: 40)
         ])
@@ -164,18 +156,18 @@ class AddNoteView: UIView {
     private func setUpCameraView() {
         addSubview(cameraView)
         NSLayoutConstraint.activate([
-            cameraView.topAnchor.constraint(equalTo: textView.bottomAnchor, constant: 0),
+            cameraView.topAnchor.constraint(equalTo: textView.bottomAnchor, constant: 10),
             cameraView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 0),
             cameraView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: 0),
             cameraView.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -110)
         ])
     }
     
-     func setUpRecognizedTextLabel() {
-        addSubview(recognizedTextLabel)
+    private func setUpRecognizedTextLabel() {
+        cameraView.addSubview(recognizedTextLabel)
         NSLayoutConstraint.activate([
-            recognizedTextLabel.topAnchor.constraint(equalTo: topAnchor, constant: 140),
-            recognizedTextLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -15)
+            recognizedTextLabel.topAnchor.constraint(equalTo: cameraView.topAnchor, constant: 17),
+            recognizedTextLabel.trailingAnchor.constraint(equalTo: cameraView.trailingAnchor, constant: -20)
         ])
     }
     
@@ -185,7 +177,7 @@ class AddNoteView: UIView {
             bottomView.topAnchor.constraint(equalTo: cameraView.bottomAnchor, constant: 0),
             bottomView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 0),
             bottomView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: 0),
-            bottomView.bottomAnchor.constraint(equalTo: safeAreaLayoutGuide.bottomAnchor, constant: 0)
+            bottomView.bottomAnchor.constraint(equalTo: bottomAnchor, constant: 0)
         ])
     }
    
@@ -206,49 +198,6 @@ class AddNoteView: UIView {
             recordBtn.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -45),
             recordBtn.widthAnchor.constraint(equalToConstant: 70)
         ])
-    }
-    
-    func checkCameraAuthorization() {
-        switch AVCaptureDevice.authorizationStatus(for: .video) {
-        case .authorized:
-            print("새노트: 카메라 권한 이미 허용")
-            avCaptureManager.createVideoPreviewLayer { AVCaptureFailureReason in
-                print("previewLayer Error: \(AVCaptureFailureReason)")
-            } previewLayerValue: { previewLayerValue in
-                self.setupPreviewLayer(previewLayer: previewLayerValue)
-            }
-            avCaptureManager.startCapturing()
-
-            break
-        default:
-            print("새노트: 카메라 권한 거부")
-            setupNotAllowCameraView()
-            recognizedTextLabel.isHidden = true
-            addBtn.isEnabled = false
-            recordBtn.isEnabled = false
-            break
-        }
-    }
-    
-    func setupNotAllowCameraView() {
-        notAllowCameraView.translatesAutoresizingMaskIntoConstraints = false
-        cameraView.addSubview(notAllowCameraView)
-        NSLayoutConstraint.activate([
-            notAllowCameraView.topAnchor.constraint(equalTo: cameraView.topAnchor),
-            notAllowCameraView.leadingAnchor.constraint(equalTo: cameraView.leadingAnchor),
-            notAllowCameraView.trailingAnchor.constraint(equalTo: cameraView.trailingAnchor),
-            notAllowCameraView.bottomAnchor.constraint(equalTo: cameraView.bottomAnchor)
-        ])
-    }
-    
-    func setupPreviewLayer(previewLayer: AVCaptureVideoPreviewLayer) {
-        cameraView.layer.insertSublayer(previewLayer, at: 0)
-        DispatchQueue.main.async {
-            previewLayer.frame = self.cameraView.bounds
-            UIView.animate(withDuration: 0.8) {
-                self.cameraView.layer.opacity = 1
-            }
-        }
     }
     
     @objc private func deleteBtnSelected() {
@@ -285,9 +234,5 @@ class AddNoteView: UIView {
             saveNote(content: resultText)
             resultLabel.text = ""
         }
-    }
-    
-    @objc private func backBtnSelected() {
-        popVCHandler?()
     }
 }
