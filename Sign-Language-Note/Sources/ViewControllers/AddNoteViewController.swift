@@ -15,7 +15,9 @@ class AddNoteViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.navigationController?.navigationBar.isHidden = true
+        
         setupViews()
+        setupAction()
     }
 
     private func setupViews() {
@@ -27,11 +29,12 @@ class AddNoteViewController: UIViewController {
             addNoteView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             addNoteView.trailingAnchor.constraint(equalTo: view.trailingAnchor)
         ])
-        
-        addNoteView.backBtn.addTarget(self, action: #selector(backBtnSelected), for: .touchUpInside)
     }
     
-    @objc private func backBtnSelected() {
-        self.navigationController?.popViewController(animated: true)
+    private func setupAction() {
+        addNoteView.setupPopVCHandler {
+            self.navigationController?.popViewController(animated: true)
+        }
     }
+    
 }

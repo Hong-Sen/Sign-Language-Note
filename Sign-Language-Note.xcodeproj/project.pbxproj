@@ -16,6 +16,7 @@
 		74522C77291906A500A3A14D /* ShowNotesViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74522C76291906A500A3A14D /* ShowNotesViewModel.swift */; };
 		745C03C429BAF56400B8E2A7 /* AVCaptureFailureReason.swift in Sources */ = {isa = PBXBuildFile; fileRef = 745C03C329BAF56400B8E2A7 /* AVCaptureFailureReason.swift */; };
 		745C03D929BF06BF00B8E2A7 /* NotAllowCameraView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 745C03D829BF06BF00B8E2A7 /* NotAllowCameraView.swift */; };
+		745C03DB29BF292800B8E2A7 /* CIImage+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 745C03DA29BF292800B8E2A7 /* CIImage+Extension.swift */; };
 		746AC68D2992BF6100EA8F50 /* AVCaptureManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 746AC68C2992BF6100EA8F50 /* AVCaptureManager.swift */; };
 		746E95722918AA8400C48EC0 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 746E95712918AA8400C48EC0 /* AppDelegate.swift */; };
 		746E95742918AA8400C48EC0 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 746E95732918AA8400C48EC0 /* SceneDelegate.swift */; };
@@ -40,6 +41,7 @@
 		74522C76291906A500A3A14D /* ShowNotesViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShowNotesViewModel.swift; sourceTree = "<group>"; };
 		745C03C329BAF56400B8E2A7 /* AVCaptureFailureReason.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AVCaptureFailureReason.swift; sourceTree = "<group>"; };
 		745C03D829BF06BF00B8E2A7 /* NotAllowCameraView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotAllowCameraView.swift; sourceTree = "<group>"; };
+		745C03DA29BF292800B8E2A7 /* CIImage+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CIImage+Extension.swift"; sourceTree = "<group>"; };
 		746AC68C2992BF6100EA8F50 /* AVCaptureManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AVCaptureManager.swift; sourceTree = "<group>"; };
 		746E956E2918AA8400C48EC0 /* Sign-Language-Note.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Sign-Language-Note.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		746E95712918AA8400C48EC0 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -197,6 +199,7 @@
 			isa = PBXGroup;
 			children = (
 				746E958D2918D72300C48EC0 /* UIColor+Extension.swift */,
+				745C03DA29BF292800B8E2A7 /* CIImage+Extension.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -289,6 +292,7 @@
 				745C03D929BF06BF00B8E2A7 /* NotAllowCameraView.swift in Sources */,
 				746AC68D2992BF6100EA8F50 /* AVCaptureManager.swift in Sources */,
 				746E95722918AA8400C48EC0 /* AppDelegate.swift in Sources */,
+				745C03DB29BF292800B8E2A7 /* CIImage+Extension.swift in Sources */,
 				74522C6F2918FC0200A3A14D /* NoteModel.swift in Sources */,
 				74743D65298FF7DA00A19D30 /* ASLHandClassifier.mlmodel in Sources */,
 				745C03C429BAF56400B8E2A7 /* AVCaptureFailureReason.swift in Sources */,

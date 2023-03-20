@@ -33,6 +33,7 @@ class AddNoteView: UIView {
         btn.translatesAutoresizingMaskIntoConstraints = false
         btn.setImage(UIImage(systemName: "chevron.left"), for: .normal)
         btn.tintColor = .black
+        btn.addTarget(AddNoteView.self, action: #selector(backBtnSelected), for: .touchUpInside)
         return btn
     }()
     
@@ -52,13 +53,13 @@ class AddNoteView: UIView {
         return view
     }()
     
-    private lazy var recognizedTextLabel: UILabel = {
+     lazy var recognizedTextLabel: UILabel = {
        let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.font = .systemFont(ofSize: 64, weight: .regular)
         label.textColor = .red
         label.textAlignment = .center
-        label.text = "A"
+        label.text = ""
         return label
     }()
     
@@ -87,12 +88,12 @@ class AddNoteView: UIView {
         return btn
     }()
     
+    private lazy var avCaptureManager = AVCaptureManager()
     private let userDefault = UserDefaults.standard
-    private let encoder = JSONEncoder()
     var noteList: [NoteModel] = UserDefaultsManager.shared.load()
     private let dateFormatter = DateFormatter()
-    private lazy var avCaptureManager = AVCaptureManager()
     private let notAllowCameraView = NotAllowCameraView()
+    var popVCHandler: (() -> Void)?
     
     init() {
         super.init(frame: .zero)
@@ -103,6 +104,10 @@ class AddNoteView: UIView {
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+    
+    func setupPopVCHandler(_ handler: @escaping () -> Void) {
+        popVCHandler = handler
     }
     
     private func setupViews() {
@@ -212,11 +217,15 @@ class AddNoteView: UIView {
             } previewLayerValue: { previewLayerValue in
                 self.setupPreviewLayer(previewLayer: previewLayerValue)
             }
+            avCaptureManager.startCapturing()
 
             break
         default:
             print("새노트: 카메라 권한 거부")
             setupNotAllowCameraView()
+            recognizedTextLabel.isHidden = true
+            addBtn.isEnabled = false
+            recordBtn.isEnabled = false
             break
         }
     }
@@ -276,5 +285,9 @@ class AddNoteView: UIView {
             saveNote(content: resultText)
             resultLabel.text = ""
         }
+    }
+    
+    @objc private func backBtnSelected() {
+        popVCHandler?()
     }
 }
