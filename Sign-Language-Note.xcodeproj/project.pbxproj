@@ -28,7 +28,7 @@
 		746E95902918DB9800C48EC0 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 746E958F2918DB9800C48EC0 /* HomeViewController.swift */; };
 		746E95922918E06E00C48EC0 /* AddNoteView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 746E95912918E06E00C48EC0 /* AddNoteView.swift */; };
 		746E95942918ED3300C48EC0 /* AddNoteViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 746E95932918ED3300C48EC0 /* AddNoteViewController.swift */; };
-		74743D65298FF7DA00A19D30 /* ASLHandClassifier.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = 74743D64298FF7DA00A19D30 /* ASLHandClassifier.mlmodel */; };
+		74D1E4B429C969ED004C6275 /* ASLHandPoseClassifier.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = 74D1E4B329C969ED004C6275 /* ASLHandPoseClassifier.mlmodel */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -55,7 +55,7 @@
 		746E958F2918DB9800C48EC0 /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		746E95912918E06E00C48EC0 /* AddNoteView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddNoteView.swift; sourceTree = "<group>"; };
 		746E95932918ED3300C48EC0 /* AddNoteViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddNoteViewController.swift; sourceTree = "<group>"; };
-		74743D64298FF7DA00A19D30 /* ASLHandClassifier.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; path = ASLHandClassifier.mlmodel; sourceTree = "<group>"; };
+		74D1E4B329C969ED004C6275 /* ASLHandPoseClassifier.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; path = ASLHandPoseClassifier.mlmodel; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -142,7 +142,7 @@
 				746E95772918AA8400C48EC0 /* Main.storyboard */,
 				746E957C2918AA8600C48EC0 /* LaunchScreen.storyboard */,
 				746E957A2918AA8600C48EC0 /* Assets.xcassets */,
-				74743D64298FF7DA00A19D30 /* ASLHandClassifier.mlmodel */,
+				74D1E4B329C969ED004C6275 /* ASLHandPoseClassifier.mlmodel */,
 			);
 			path = Resources;
 			sourceTree = "<group>";
@@ -281,12 +281,12 @@
 				74522C74291904A600A3A14D /* UserDefaultsManager.swift in Sources */,
 				746E958B2918D55C00C48EC0 /* HomeView.swift in Sources */,
 				74522C682918F98D00A3A14D /* ShowNotesView.swift in Sources */,
+				74D1E4B429C969ED004C6275 /* ASLHandPoseClassifier.mlmodel in Sources */,
 				745C03D929BF06BF00B8E2A7 /* NotAllowCameraView.swift in Sources */,
 				746AC68D2992BF6100EA8F50 /* AVCaptureManager.swift in Sources */,
 				746E95722918AA8400C48EC0 /* AppDelegate.swift in Sources */,
 				745C03DB29BF292800B8E2A7 /* CIImage+Extension.swift in Sources */,
 				74522C6F2918FC0200A3A14D /* NoteModel.swift in Sources */,
-				74743D65298FF7DA00A19D30 /* ASLHandClassifier.mlmodel in Sources */,
 				745C03C429BAF56400B8E2A7 /* AVCaptureFailureReason.swift in Sources */,
 				746E95742918AA8400C48EC0 /* SceneDelegate.swift in Sources */,
 				74522C712918FD0A00A3A14D /* ShowNotesViewController.swift in Sources */,
@@ -449,7 +449,7 @@
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				IPHONEOS_DEPLOYMENT_TARGET = 14.7;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -457,6 +457,9 @@
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.hongseeun.Sign-Language-Note";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -480,7 +483,7 @@
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				IPHONEOS_DEPLOYMENT_TARGET = 14.7;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -488,6 +491,9 @@
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.hongseeun.Sign-Language-Note";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
