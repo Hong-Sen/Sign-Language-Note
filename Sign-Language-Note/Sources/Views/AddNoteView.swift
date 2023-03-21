@@ -298,9 +298,15 @@ class AddNoteView: UIView {
 }
 
 extension AddNoteView: VideoCaptureDelegate {
-    func getPredictionResult(label: String) {
+    func getPredictionResult(isDetected: Bool, label: String) {
         DispatchQueue.main.async {
             self.recognizedTextLabel.text = label
+            if isDetected {
+                self.addBtn.isEnabled = true
+            }
+            else {
+                self.addBtn.isEnabled = false
+            }
         }
     }
 }
