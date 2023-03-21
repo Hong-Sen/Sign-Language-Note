@@ -1,0 +1,24 @@
+{
+    "fileFormatVersion": "1.0.0",
+    "itemInfoEntries": {
+        "A32FFE1C-18DD-4AB4-8527-DE54418AF043": {
+            "author": "com.apple.CoreML",
+            "description": "CoreML Model Specification",
+            "name": "ASLHandPoseClassifier.mlmodel",
+            "path": "com.apple.CoreML/ASLHandPoseClassifier.mlmodel"
+        },
+        "B64A4037-222A-4B61-9500-D072E6624F5E": {
+            "author": "com.apple.CoreML",
+            "description": "External Metadata Overlay",
+            "name": "Metadata.json",
+            "path": "com.apple.CoreML/Metadata.json"
+        },
+        "E784AAB3-5F51-4D12-ABA4-83297EAB30D3": {
+            "author": "com.apple.CoreML",
+            "description": "External FeatureDescription Overlay",
+            "name": "FeatureDescriptions.json",
+            "path": "com.apple.CoreML/FeatureDescriptions.json"
+        }
+    },
+    "rootModelIdentifier": "A32FFE1C-18DD-4AB4-8527-DE54418AF043"
+}

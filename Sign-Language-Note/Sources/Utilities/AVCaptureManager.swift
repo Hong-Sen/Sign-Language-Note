@@ -10,7 +10,7 @@ import AVFoundation
 import Vision
 
 public protocol VideoCaptureDelegate: AnyObject {
-    func getPredictionResult(label: String)
+    func getPredictionResult(isDetected: Bool, label: String)
 }
 
 public class AVCaptureManager: NSObject {
@@ -156,7 +156,10 @@ extension AVCaptureManager: AVCaptureVideoDataOutputSampleBufferDelegate {
             print(error.localizedDescription)
         }
         
-        guard let handPoses = handposeRequest.results, !handPoses.isEmpty else { return }
+        guard let handPoses = handposeRequest.results, !handPoses.isEmpty else {
+            delegate.getPredictionResult(isDetected: false, label: "?")
+            return
+        }
         let observation = handPoses.first
         do {
             guard let keypointsMultiArray = try observation?.keypointsMultiArray() else { fatalError() }
@@ -164,7 +167,7 @@ extension AVCaptureManager: AVCaptureVideoDataOutputSampleBufferDelegate {
             let outputLabel = output.label
             let confidence = output.labelProbabilities[outputLabel]!
             if confidence > 0.8 {
-                delegate.getPredictionResult(label: output.label)
+                delegate.getPredictionResult(isDetected: true, label: output.label)
             }
         } catch {
             print(error.localizedDescription)

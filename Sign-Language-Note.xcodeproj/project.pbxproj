@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		741BBC7E29C9E211004F15E2 /* ASLHandPoseClassifier.mlpackage in Sources */ = {isa = PBXBuildFile; fileRef = 741BBC7D29C9E211004F15E2 /* ASLHandPoseClassifier.mlpackage */; };
 		74522C682918F98D00A3A14D /* ShowNotesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74522C672918F98D00A3A14D /* ShowNotesView.swift */; };
 		74522C6C2918FABE00A3A14D /* NoteCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74522C6A2918FABE00A3A14D /* NoteCell.swift */; };
 		74522C6D2918FABE00A3A14D /* NoteCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 74522C6B2918FABE00A3A14D /* NoteCell.xib */; };
@@ -28,10 +29,10 @@
 		746E95902918DB9800C48EC0 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 746E958F2918DB9800C48EC0 /* HomeViewController.swift */; };
 		746E95922918E06E00C48EC0 /* AddNoteView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 746E95912918E06E00C48EC0 /* AddNoteView.swift */; };
 		746E95942918ED3300C48EC0 /* AddNoteViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 746E95932918ED3300C48EC0 /* AddNoteViewController.swift */; };
-		74D1E4B429C969ED004C6275 /* ASLHandPoseClassifier.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = 74D1E4B329C969ED004C6275 /* ASLHandPoseClassifier.mlmodel */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		741BBC7D29C9E211004F15E2 /* ASLHandPoseClassifier.mlpackage */ = {isa = PBXFileReference; lastKnownFileType = folder.mlpackage; path = ASLHandPoseClassifier.mlpackage; sourceTree = "<group>"; };
 		74522C672918F98D00A3A14D /* ShowNotesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShowNotesView.swift; sourceTree = "<group>"; };
 		74522C6A2918FABE00A3A14D /* NoteCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteCell.swift; sourceTree = "<group>"; };
 		74522C6B2918FABE00A3A14D /* NoteCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = NoteCell.xib; sourceTree = "<group>"; };
@@ -55,7 +56,6 @@
 		746E958F2918DB9800C48EC0 /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		746E95912918E06E00C48EC0 /* AddNoteView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddNoteView.swift; sourceTree = "<group>"; };
 		746E95932918ED3300C48EC0 /* AddNoteViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddNoteViewController.swift; sourceTree = "<group>"; };
-		74D1E4B329C969ED004C6275 /* ASLHandPoseClassifier.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; path = ASLHandPoseClassifier.mlmodel; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -142,7 +142,7 @@
 				746E95772918AA8400C48EC0 /* Main.storyboard */,
 				746E957C2918AA8600C48EC0 /* LaunchScreen.storyboard */,
 				746E957A2918AA8600C48EC0 /* Assets.xcassets */,
-				74D1E4B329C969ED004C6275 /* ASLHandPoseClassifier.mlmodel */,
+				741BBC7D29C9E211004F15E2 /* ASLHandPoseClassifier.mlpackage */,
 			);
 			path = Resources;
 			sourceTree = "<group>";
@@ -281,7 +281,6 @@
 				74522C74291904A600A3A14D /* UserDefaultsManager.swift in Sources */,
 				746E958B2918D55C00C48EC0 /* HomeView.swift in Sources */,
 				74522C682918F98D00A3A14D /* ShowNotesView.swift in Sources */,
-				74D1E4B429C969ED004C6275 /* ASLHandPoseClassifier.mlmodel in Sources */,
 				745C03D929BF06BF00B8E2A7 /* NotAllowCameraView.swift in Sources */,
 				746AC68D2992BF6100EA8F50 /* AVCaptureManager.swift in Sources */,
 				746E95722918AA8400C48EC0 /* AppDelegate.swift in Sources */,
@@ -291,6 +290,7 @@
 				746E95742918AA8400C48EC0 /* SceneDelegate.swift in Sources */,
 				74522C712918FD0A00A3A14D /* ShowNotesViewController.swift in Sources */,
 				74522C6C2918FABE00A3A14D /* NoteCell.swift in Sources */,
+				741BBC7E29C9E211004F15E2 /* ASLHandPoseClassifier.mlpackage in Sources */,
 				746E958E2918D72300C48EC0 /* UIColor+Extension.swift in Sources */,
 				746E95902918DB9800C48EC0 /* HomeViewController.swift in Sources */,
 			);
