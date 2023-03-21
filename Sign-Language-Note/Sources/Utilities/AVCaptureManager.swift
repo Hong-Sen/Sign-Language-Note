@@ -7,9 +7,10 @@
 
 import UIKit
 import AVFoundation
+import Vision
 
 public protocol VideoCaptureDelegate: AnyObject {
-    func onFrameCaptured(avCapture: AVCaptureManager, pixelBuffer: CVPixelBuffer?, timestamp: CMTime)
+    func getPredictionResult(label: String)
 }
 
 public class AVCaptureManager: NSObject {
@@ -28,8 +29,10 @@ public class AVCaptureManager: NSObject {
         qos: .userInteractive,
         attributes: [],
         autoreleaseFrequency: .workItem)
+    var handposeRequest = VNDetectHumanHandPoseRequest()
     var bufferSize: CGSize = .zero
     var lastTimestamp = CMTime()
+    let model = ASLHandPoseClassifier()
     
     private func setupAVCapture(completion: @escaping (AVCaptureFailureReason?) -> Void) {
             guard let videoDevice = videoDevice else {
@@ -143,13 +146,28 @@ extension AVCaptureManager: AVCaptureVideoDataOutputSampleBufferDelegate {
     public func captureOutput(_ output: AVCaptureOutput, didOutput sampleBuffer: CMSampleBuffer, from connection: AVCaptureConnection) {
         // output은 AVCaptureVideoDataOutput 형식이고 프레임 관련 출력
         guard let delegate = self.delegate else { return }
+        handposeRequest.maximumHandCount = 1
+        handposeRequest.revision = VNDetectHumanHandPoseRequestRevision1 // ?
         
-        let timestamp = CMSampleBufferGetPresentationTimeStamp(sampleBuffer)
-        let elapsedTime = timestamp - lastTimestamp
-        if elapsedTime >= CMTimeMake(value: 1, timescale: Int32(15)) {
-            lastTimestamp = timestamp
-            let imgBuffer = CMSampleBufferGetImageBuffer(sampleBuffer)
-            delegate.onFrameCaptured(avCapture: self, pixelBuffer: imgBuffer, timestamp: timestamp)
+        let handler = VNImageRequestHandler(cmSampleBuffer: sampleBuffer)
+        do {
+            try handler.perform([handposeRequest])
+        } catch {
+            print(error.localizedDescription)
+        }
+        
+        guard let handPoses = handposeRequest.results, !handPoses.isEmpty else { return }
+        let observation = handPoses.first
+        do {
+            guard let keypointsMultiArray = try observation?.keypointsMultiArray() else { fatalError() }
+            let output = try model.prediction(poses: keypointsMultiArray)
+            let outputLabel = output.label
+            let confidence = output.labelProbabilities[outputLabel]!
+            if confidence > 0.8 {
+                delegate.getPredictionResult(label: output.label)
+            }
+        } catch {
+            print(error.localizedDescription)
         }
     }
 }

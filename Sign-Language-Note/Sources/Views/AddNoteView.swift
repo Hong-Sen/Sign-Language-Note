@@ -8,6 +8,7 @@
 import Foundation
 import UIKit
 import AVFoundation
+import CoreML
 
 class AddNoteView: UIView {
     
@@ -19,7 +20,7 @@ class AddNoteView: UIView {
     }()
     
     private lazy var resultLabel: UILabel = {
-       let label = UILabel()
+        let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.font = .systemFont(ofSize: 20, weight: .regular)
         label.textColor = .black
@@ -27,7 +28,7 @@ class AddNoteView: UIView {
         label.text = ""
         return label
     }()
-        
+    
     var backBtn: UIButton = {
         let btn = UIButton(type: .system)
         btn.translatesAutoresizingMaskIntoConstraints = false
@@ -46,15 +47,15 @@ class AddNoteView: UIView {
         return btn
     }()
     
-     lazy var cameraView: UIView = {
+    lazy var cameraView: UIView = {
         let view = UIView()
         view.translatesAutoresizingMaskIntoConstraints = false
         view.backgroundColor = .systemBackground
         return view
     }()
     
-     lazy var recognizedTextLabel: UILabel = {
-       let label = UILabel()
+    lazy var recognizedTextLabel: UILabel = {
+        let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.font = .systemFont(ofSize: 64, weight: .regular)
         label.textColor = .red
@@ -89,7 +90,7 @@ class AddNoteView: UIView {
     }()
     
     private lazy var avCaptureManager = AVCaptureManager()
-    let model = ASLHandClassifier()
+    let model = ASLHandPoseClassifier()
     let context = CIContext()
     private let userDefault = UserDefaults.standard
     var noteList: [NoteModel] = UserDefaultsManager.shared.load()
@@ -171,11 +172,11 @@ class AddNoteView: UIView {
             cameraView.topAnchor.constraint(equalTo: textView.bottomAnchor, constant: 0),
             cameraView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 0),
             cameraView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: 0),
-            cameraView.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -110)
+            cameraView.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -130)
         ])
     }
     
-     func setUpRecognizedTextLabel() {
+    func setUpRecognizedTextLabel() {
         addSubview(recognizedTextLabel)
         NSLayoutConstraint.activate([
             recognizedTextLabel.topAnchor.constraint(equalTo: topAnchor, constant: 140),
@@ -192,7 +193,7 @@ class AddNoteView: UIView {
             bottomView.bottomAnchor.constraint(equalTo: safeAreaLayoutGuide.bottomAnchor, constant: 0)
         ])
     }
-   
+    
     private func setUpAddBtn() {
         bottomView.addSubview(addBtn)
         NSLayoutConstraint.activate([
@@ -222,11 +223,14 @@ class AddNoteView: UIView {
                 self.setupPreviewLayer(previewLayer: previewLayerValue)
             }
             avCaptureManager.startCapturing()
-
+            
             break
         default:
             print("새노트: 카메라 권한 거부")
             setupNotAllowCameraView()
+            recognizedTextLabel.isHidden = true
+            addBtn.isEnabled = false
+            recordBtn.isEnabled = false
             break
         }
     }
@@ -294,15 +298,9 @@ class AddNoteView: UIView {
 }
 
 extension AddNoteView: VideoCaptureDelegate {
-    func onFrameCaptured(avCapture: AVCaptureManager, pixelBuffer: CVPixelBuffer?, timestamp: CMTime) {
-        guard let pixelBuffer = pixelBuffer else { return }
-        
-        guard let scaledPixelBuffer = CIImage(cvImageBuffer: pixelBuffer).resize(size: CGSize(width: 299, height: 299)).toPixelBuffer(context: context) else { return }
-        
-        let prediction = try? self.model.prediction(image: scaledPixelBuffer)
-        
+    func getPredictionResult(label: String) {
         DispatchQueue.main.async {
-            self.recognizedTextLabel.text = prediction?.classLabel ?? "?"
+            self.recognizedTextLabel.text = label
         }
     }
 }
