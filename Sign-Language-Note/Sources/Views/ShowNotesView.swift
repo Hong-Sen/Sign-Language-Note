@@ -23,7 +23,7 @@ class ShowNotesView: UIView {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.text = "전체노트"
-        label.font = .systemFont(ofSize: 20, weight: .regular)
+        label.font = UIFont(name: "dovemayo_gothic", size: 20)
         label.textColor = .textColor
         return label
     }()

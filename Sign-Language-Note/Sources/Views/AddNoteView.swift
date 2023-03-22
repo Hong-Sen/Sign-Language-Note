@@ -22,7 +22,7 @@ class AddNoteView: UIView {
     private lazy var resultLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.font = .systemFont(ofSize: 20, weight: .regular)
+        label.font = UIFont(name: "dovemayo_gothic", size: 22)
         label.textColor = .black
         label.textAlignment = .left
         label.text = ""
@@ -57,7 +57,7 @@ class AddNoteView: UIView {
     lazy var recognizedTextLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.font = .systemFont(ofSize: 64, weight: .regular)
+        label.font = UIFont(name: "dovemayo_gothic", size: 64)
         label.textColor = .red
         label.textAlignment = .center
         label.text = "?"
@@ -87,6 +87,13 @@ class AddNoteView: UIView {
         btn.tintColor = .white
         btn.addTarget(self, action: #selector(recordBtnSelected), for: .touchUpInside)
         return btn
+    }()
+    
+    private lazy var emptyView: UIView = {
+        let view = UIView()
+        view.translatesAutoresizingMaskIntoConstraints = false
+        view.backgroundColor = .black
+        return view
     }()
     
     private lazy var avCaptureManager = AVCaptureManager()
@@ -129,6 +136,7 @@ class AddNoteView: UIView {
         setUpBottomView()
         setUpAddBtn()
         setUpRecordBtn()
+        setUpEmptyView()
         dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
     }
     
@@ -213,6 +221,16 @@ class AddNoteView: UIView {
             recordBtn.centerYAnchor.constraint(equalTo: bottomView.centerYAnchor, constant: 0),
             recordBtn.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -45),
             recordBtn.widthAnchor.constraint(equalToConstant: 70)
+        ])
+    }
+    
+    private func setUpEmptyView() {
+        addSubview(emptyView)
+        NSLayoutConstraint.activate([
+            emptyView.topAnchor.constraint(equalTo: bottomView.bottomAnchor),
+            emptyView.trailingAnchor.constraint(equalTo: trailingAnchor),
+            emptyView.leadingAnchor.constraint(equalTo: leadingAnchor),
+            emptyView.bottomAnchor.constraint(equalTo: bottomAnchor)
         ])
     }
     

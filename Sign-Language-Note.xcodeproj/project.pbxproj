@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		741BBC7E29C9E211004F15E2 /* ASLHandPoseClassifier.mlpackage in Sources */ = {isa = PBXBuildFile; fileRef = 741BBC7D29C9E211004F15E2 /* ASLHandPoseClassifier.mlpackage */; };
+		741BBC8129CAC034004F15E2 /* dovemayo.otf in Resources */ = {isa = PBXBuildFile; fileRef = 741BBC8029CAC034004F15E2 /* dovemayo.otf */; };
+		741BBC8329CAC0E6004F15E2 /* dovemayo_gothic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 741BBC8229CAC0E5004F15E2 /* dovemayo_gothic.ttf */; };
 		74522C682918F98D00A3A14D /* ShowNotesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74522C672918F98D00A3A14D /* ShowNotesView.swift */; };
 		74522C6C2918FABE00A3A14D /* NoteCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74522C6A2918FABE00A3A14D /* NoteCell.swift */; };
 		74522C6D2918FABE00A3A14D /* NoteCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 74522C6B2918FABE00A3A14D /* NoteCell.xib */; };
@@ -33,6 +35,8 @@
 
 /* Begin PBXFileReference section */
 		741BBC7D29C9E211004F15E2 /* ASLHandPoseClassifier.mlpackage */ = {isa = PBXFileReference; lastKnownFileType = folder.mlpackage; path = ASLHandPoseClassifier.mlpackage; sourceTree = "<group>"; };
+		741BBC8029CAC034004F15E2 /* dovemayo.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = dovemayo.otf; sourceTree = "<group>"; };
+		741BBC8229CAC0E5004F15E2 /* dovemayo_gothic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = dovemayo_gothic.ttf; sourceTree = "<group>"; };
 		74522C672918F98D00A3A14D /* ShowNotesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShowNotesView.swift; sourceTree = "<group>"; };
 		74522C6A2918FABE00A3A14D /* NoteCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteCell.swift; sourceTree = "<group>"; };
 		74522C6B2918FABE00A3A14D /* NoteCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = NoteCell.xib; sourceTree = "<group>"; };
@@ -69,6 +73,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		741BBC7F29CAC023004F15E2 /* Fonts */ = {
+			isa = PBXGroup;
+			children = (
+				741BBC8029CAC034004F15E2 /* dovemayo.otf */,
+				741BBC8229CAC0E5004F15E2 /* dovemayo_gothic.ttf */,
+			);
+			path = Fonts;
+			sourceTree = "<group>";
+		};
 		743948A32991104400346268 /* Utilities */ = {
 			isa = PBXGroup;
 			children = (
@@ -139,6 +152,7 @@
 		746E95852918D11600C48EC0 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				741BBC7F29CAC023004F15E2 /* Fonts */,
 				746E95772918AA8400C48EC0 /* Main.storyboard */,
 				746E957C2918AA8600C48EC0 /* LaunchScreen.storyboard */,
 				746E957A2918AA8600C48EC0 /* Assets.xcassets */,
@@ -265,6 +279,8 @@
 				746E957B2918AA8600C48EC0 /* Assets.xcassets in Resources */,
 				746E95792918AA8400C48EC0 /* Main.storyboard in Resources */,
 				74522C6D2918FABE00A3A14D /* NoteCell.xib in Resources */,
+				741BBC8329CAC0E6004F15E2 /* dovemayo_gothic.ttf in Resources */,
+				741BBC8129CAC034004F15E2 /* dovemayo.otf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

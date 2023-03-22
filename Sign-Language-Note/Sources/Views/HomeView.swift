@@ -17,18 +17,11 @@ class HomeView: UIView {
         return view
     }()
     
-    private lazy var titleBackgroundImg: UIImageView = {
-        let img = UIImageView()
-        img.translatesAutoresizingMaskIntoConstraints = false
-        img.image = UIImage(named: "title_background_img")
-        return img
-    }()
-    
     private lazy var titleLabel: UILabel = {
        let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.text = "수어노트"
-        label.font = .systemFont(ofSize: 32, weight: .bold)
+        label.font = UIFont(name: "dovemayo_gothic", size: 36)
         label.textColor = .black
         label.textAlignment = .center
         return label
@@ -39,7 +32,7 @@ class HomeView: UIView {
         label.translatesAutoresizingMaskIntoConstraints = false
         label.numberOfLines = 2
         label.text = "조용한 대화, 수어\n소중한 대화를 기록으로 남겨보세요"
-        label.font = .systemFont(ofSize: 15, weight: .regular)
+        label.font = UIFont(name: "dovemayo", size: 17)
         label.textColor = .textColor
         label.textAlignment = .center
         return label
@@ -51,7 +44,7 @@ class HomeView: UIView {
         btn.backgroundColor = .primary
         btn.layer.cornerRadius = 10
         btn.setTitle("새 노트 추가하기", for: .normal)
-        btn.titleLabel?.font = .systemFont(ofSize: 16, weight: .semibold)
+        btn.titleLabel?.font = UIFont(name: "dovemayo_gothic", size: 20)
         btn.titleLabel?.tintColor = .textColor
         btn.titleLabel?.textAlignment = .center
         return btn
@@ -63,7 +56,7 @@ class HomeView: UIView {
         btn.backgroundColor = .primary
         btn.layer.cornerRadius = 10
         btn.setTitle("전체 노트 보기", for: .normal)
-        btn.titleLabel?.font = .systemFont(ofSize: 16, weight: .semibold)
+        btn.titleLabel?.font = UIFont(name: "dovemayo_gothic", size: 20)
         btn.titleLabel?.tintColor = .textColor
         btn.titleLabel?.textAlignment = .center
         return btn
@@ -82,7 +75,6 @@ class HomeView: UIView {
     private func setupViews() {
         backgroundColor = .white
         setUpTitleView()
-        setUpTitleBackgroundImg()
         setUpTitleLabel()
         setUpDescriptionLabel()
         setUpAddNoteBtn()
@@ -97,16 +89,6 @@ class HomeView: UIView {
             titleView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 28),
             titleView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -28),
             titleView.heightAnchor.constraint(equalToConstant: 181)
-        ])
-    }
-    
-    private func setUpTitleBackgroundImg() {
-        titleView.addSubview(titleBackgroundImg)
-        NSLayoutConstraint.activate([
-            titleBackgroundImg.topAnchor.constraint(equalTo: titleView.topAnchor),
-            titleBackgroundImg.bottomAnchor.constraint(equalTo: titleView.bottomAnchor, constant: -84),
-            titleBackgroundImg.leadingAnchor.constraint(equalTo: titleView.leadingAnchor, constant: 0),
-            titleBackgroundImg.trailingAnchor.constraint(equalTo: titleView.trailingAnchor, constant: 0),
         ])
     }
     
