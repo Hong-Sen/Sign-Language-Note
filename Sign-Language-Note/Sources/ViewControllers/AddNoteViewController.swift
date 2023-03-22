@@ -15,11 +15,10 @@ class AddNoteViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.navigationController?.navigationBar.isHidden = true
-        
         setupViews()
         setupAction()
     }
-
+    
     private func setupViews() {
         view.addSubview(addNoteView)
         addNoteView.translatesAutoresizingMaskIntoConstraints = false
@@ -36,4 +35,6 @@ class AddNoteViewController: UIViewController {
             self.navigationController?.popViewController(animated: true)
         }
     }
+    
+    
 }

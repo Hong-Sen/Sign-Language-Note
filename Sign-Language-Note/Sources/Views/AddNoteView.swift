@@ -105,6 +105,9 @@ class AddNoteView: UIView {
         sendSubviewToBack(cameraView)
         
         self.avCaptureManager.delegate = self
+        
+        print("VIEW SIZE")
+        print(cameraView.heightAnchor)
     }
     
     required init?(coder: NSCoder) {
@@ -116,7 +119,7 @@ class AddNoteView: UIView {
     }
     
     private func setupViews() {
-        backgroundColor = .black
+        backgroundColor = .systemBackground
         setUpTitleView()
         setUpBackBtn()
         setUpDeleteBtn()
