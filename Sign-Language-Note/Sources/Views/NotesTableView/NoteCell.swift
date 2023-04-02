@@ -21,7 +21,7 @@ class NoteCell: UITableViewCell {
     var dateLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.font = .systemFont(ofSize: 14, weight: .semibold)
+        label.font = UIFont(name: "dovemayo_gothic", size: 15)
         label.textColor = .textColor
         return label
     }()
@@ -29,7 +29,7 @@ class NoteCell: UITableViewCell {
     var contentLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.font = .systemFont(ofSize: 16, weight: .regular)
+        label.font = UIFont(name: "dovemayo_gothic", size: 20)
         label.textColor = .textColor
         return label
     }()

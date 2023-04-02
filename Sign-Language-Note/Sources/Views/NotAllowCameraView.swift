@@ -21,7 +21,7 @@ class NotAllowCameraView: UIView {
     private var infoLabel: UILabel = {
        let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.font = .systemFont(ofSize: 20, weight: .semibold)
+        label.font = UIFont(name: "dovemayo_gothic", size: 20)
         label.numberOfLines = 2
         label.textColor = .white
         label.textAlignment = .center

@@ -7,7 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		741BBC7E29C9E211004F15E2 /* ASLHandPoseClassifier.mlpackage in Sources */ = {isa = PBXBuildFile; fileRef = 741BBC7D29C9E211004F15E2 /* ASLHandPoseClassifier.mlpackage */; };
+		741BBC8129CAC034004F15E2 /* dovemayo.otf in Resources */ = {isa = PBXBuildFile; fileRef = 741BBC8029CAC034004F15E2 /* dovemayo.otf */; };
+		741BBC8329CAC0E6004F15E2 /* dovemayo_gothic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 741BBC8229CAC0E5004F15E2 /* dovemayo_gothic.ttf */; };
+		74443EAE29D99F1700CCEDCB /* ASLHandPoseClassifier.mlpackage in Sources */ = {isa = PBXBuildFile; fileRef = 74443EAD29D99F1700CCEDCB /* ASLHandPoseClassifier.mlpackage */; };
 		74522C682918F98D00A3A14D /* ShowNotesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74522C672918F98D00A3A14D /* ShowNotesView.swift */; };
 		74522C6C2918FABE00A3A14D /* NoteCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74522C6A2918FABE00A3A14D /* NoteCell.swift */; };
 		74522C6D2918FABE00A3A14D /* NoteCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 74522C6B2918FABE00A3A14D /* NoteCell.xib */; };
@@ -32,7 +34,9 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		741BBC7D29C9E211004F15E2 /* ASLHandPoseClassifier.mlpackage */ = {isa = PBXFileReference; lastKnownFileType = folder.mlpackage; path = ASLHandPoseClassifier.mlpackage; sourceTree = "<group>"; };
+		741BBC8029CAC034004F15E2 /* dovemayo.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = dovemayo.otf; sourceTree = "<group>"; };
+		741BBC8229CAC0E5004F15E2 /* dovemayo_gothic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = dovemayo_gothic.ttf; sourceTree = "<group>"; };
+		74443EAD29D99F1700CCEDCB /* ASLHandPoseClassifier.mlpackage */ = {isa = PBXFileReference; lastKnownFileType = folder.mlpackage; path = ASLHandPoseClassifier.mlpackage; sourceTree = "<group>"; };
 		74522C672918F98D00A3A14D /* ShowNotesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShowNotesView.swift; sourceTree = "<group>"; };
 		74522C6A2918FABE00A3A14D /* NoteCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteCell.swift; sourceTree = "<group>"; };
 		74522C6B2918FABE00A3A14D /* NoteCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = NoteCell.xib; sourceTree = "<group>"; };
@@ -69,6 +73,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		741BBC7F29CAC023004F15E2 /* Fonts */ = {
+			isa = PBXGroup;
+			children = (
+				741BBC8029CAC034004F15E2 /* dovemayo.otf */,
+				741BBC8229CAC0E5004F15E2 /* dovemayo_gothic.ttf */,
+			);
+			path = Fonts;
+			sourceTree = "<group>";
+		};
 		743948A32991104400346268 /* Utilities */ = {
 			isa = PBXGroup;
 			children = (
@@ -139,10 +152,11 @@
 		746E95852918D11600C48EC0 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				741BBC7F29CAC023004F15E2 /* Fonts */,
 				746E95772918AA8400C48EC0 /* Main.storyboard */,
 				746E957C2918AA8600C48EC0 /* LaunchScreen.storyboard */,
 				746E957A2918AA8600C48EC0 /* Assets.xcassets */,
-				741BBC7D29C9E211004F15E2 /* ASLHandPoseClassifier.mlpackage */,
+				74443EAD29D99F1700CCEDCB /* ASLHandPoseClassifier.mlpackage */,
 			);
 			path = Resources;
 			sourceTree = "<group>";
@@ -265,6 +279,8 @@
 				746E957B2918AA8600C48EC0 /* Assets.xcassets in Resources */,
 				746E95792918AA8400C48EC0 /* Main.storyboard in Resources */,
 				74522C6D2918FABE00A3A14D /* NoteCell.xib in Resources */,
+				741BBC8329CAC0E6004F15E2 /* dovemayo_gothic.ttf in Resources */,
+				741BBC8129CAC034004F15E2 /* dovemayo.otf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -290,7 +306,7 @@
 				746E95742918AA8400C48EC0 /* SceneDelegate.swift in Sources */,
 				74522C712918FD0A00A3A14D /* ShowNotesViewController.swift in Sources */,
 				74522C6C2918FABE00A3A14D /* NoteCell.swift in Sources */,
-				741BBC7E29C9E211004F15E2 /* ASLHandPoseClassifier.mlpackage in Sources */,
+				74443EAE29D99F1700CCEDCB /* ASLHandPoseClassifier.mlpackage in Sources */,
 				746E958E2918D72300C48EC0 /* UIColor+Extension.swift in Sources */,
 				746E95902918DB9800C48EC0 /* HomeViewController.swift in Sources */,
 			);
@@ -447,8 +463,8 @@
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -462,7 +478,7 @@
 				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -481,8 +497,8 @@
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -496,7 +512,7 @@
 				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};

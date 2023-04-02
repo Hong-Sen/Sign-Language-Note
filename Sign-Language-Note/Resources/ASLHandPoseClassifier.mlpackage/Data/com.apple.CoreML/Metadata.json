@@ -1,12 +1,12 @@
 {
-  "MLModelVersionStringKey" : "1.0",
-  "MLModelDescriptionKey" : "ASL인식 model",
+  "MLModelVersionStringKey" : "--",
+  "MLModelDescriptionKey" : "ASL,0-9 classifier",
   "MLModelCreatorDefinedKey" : {
     "Prediction Window Size" : "1",
     "com.apple.createml.app.tag" : "99.2",
-    "Target Frame Rate" : "30.0",
     "com.apple.coreml.model.preview.type" : "handPoseClassifier",
-    "com.apple.createml.app.version" : "4.0"
+    "com.apple.createml.app.version" : "4.0",
+    "Target Frame Rate" : "30.0"
   },
   "MLModelAuthorKey" : "홍세은",
   "MLModelLicenseKey" : "--"
