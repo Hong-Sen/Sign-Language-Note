@@ -39,6 +39,18 @@ ASL(American Sign Language)과 숫자(0-9) 인식 가능
 + 전체 노트 보기: 저장된 텍스트 보기
 <img width="300" alt="스크린샷 2023-03-28 오후 3 00 28" src="https://user-images.githubusercontent.com/66013544/229334524-cb302911-a3aa-451e-8e08-ade157c1c71e.PNG">
 
+<br/>
+
+## CoreML model
++ Accuracy
+  + Training: 99%
+  + Validation: 79%
+
++ Training data:
+  + 36 classes
+  + 3293 items
+
+<br/>
 
 ## Dataset
 |dataset|출처|
